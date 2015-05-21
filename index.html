@@ -3,23 +3,99 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
   </head>
   <body>
+    <div class=wrapper>
+      <div class=buttonsDiv>
+        <button type="button" class="button refresh">Refresh Twitts</button>
+        <button type="button" class="button showall">Show All Users</button>
+        <button type="button" class="button douglascalhoun">@douglascalhoun</button>
+        <button type="button" class="button mracus">@mracus</button>
+        <button type="button" class="button sharksforcheap">@sharksforcheap</button>
+        <button type="button" class="button shawndrost">@shawndrost</button>
+      </div>
+    </div>  
+
     <script>
+
 
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('');
+        $body.html();
+               
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+        //Generate new twittles        
 
+        var display = function() {
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.addClass('tweet')
+            $tweet.addClass(tweet.user)
+            $tweet.appendTo($body);
+
+            var $timestamp = $('<div></div>');
+            $timestamp.text(new Date($.now()))
+            $timestamp.addClass('timestamp')
+            $timestamp.appendTo($tweet);
+
+            index -= 1;
+            };
+          };     
+
+        //Button Functionality
+
+        $('.refresh').on('click', display);        
+        
+        $('.douglascalhoun').on('click', function() {
+          $('.douglascalhoun').show();
+          $('.mracus').hide();
+          $('.sharksforcheap').hide();
+          $('.shawndrost').hide();
+          $('.button').show();
+        });
+
+        $('.mracus').on('click', function() {
+          $('.douglascalhoun').hide();
+          $('.mracus').show();
+          $('.sharksforcheap').hide();
+          $('.shawndrost').hide();
+          $('.button').show();
+        });
+
+        $('.sharksforcheap').on('click', function() {
+          $('.douglascalhoun').hide();
+          $('.mracus').hide();
+          $('.sharksforcheap').show();
+          $('.shawndrost').hide();
+          $('.button').show();
+        });
+
+        $('.shawndrost').on('click', function() {
+          $('.douglascalhoun').hide();
+          $('.mracus').hide();
+          $('.sharksforcheap').hide();
+          $('.shawndrost').show();
+          $('.button').show();
+        });
+
+        $('.showall').on('click', function() {
+          $('.douglascalhoun').show();
+          $('.mracus').show();
+          $('.sharksforcheap').show();
+          $('.shawndrost').show();
+          $('.button').show();
+
+
+        
+
+
+        });
+
+        
       });
 
     </script>
